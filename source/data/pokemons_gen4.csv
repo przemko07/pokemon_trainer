@@ -1,0 +1,121 @@
+Sdex	Ndex	MS	Pokémon	Type
+#001	#387	Turtwig	Turtwig	Grass
+#002	#388	Grotle	Grotle	Grass
+#003	#389	Torterra	Torterra	Grass	Ground
+#004	#390	Chimchar	Chimchar	Fire
+#005	#391	Monferno	Monferno	Fire	Fighting
+#006	#392	Infernape	Infernape	Fire	Fighting
+#007	#393	Piplup	Piplup	Water
+#008	#394	Prinplup	Prinplup	Water
+#009	#395	Empoleon	Empoleon	Water	Steel
+#010	#396	Starly	Starly	Normal	Flying
+#011	#397	Staravia	Staravia	Normal	Flying
+#012	#398	Staraptor	Staraptor	Normal	Flying
+#013	#399	Bidoof	Bidoof	Normal
+#014	#400	Bibarel	Bibarel	Normal	Water
+#015	#401	Kricketot	Kricketot	Bug
+#016	#402	Kricketune	Kricketune	Bug
+#017	#403	Shinx	Shinx	Electric
+#018	#404	Luxio	Luxio	Electric
+#019	#405	Luxray	Luxray	Electric
+#025	#406	Budew	Budew	Grass	Poison
+#027	#407	Roserade	Roserade	Grass	Poison
+#036	#408	Cranidos	Cranidos	Rock
+#037	#409	Rampardos	Rampardos	Rock
+#038	#410	Shieldon	Shieldon	Rock	Steel
+#039	#411	Bastiodon	Bastiodon	Rock	Steel
+#045	#412	Burmy	Burmy	Bug
+#045	#412	Burmy	Burmy	Bug
+#045	#412	Burmy	Burmy	Bug
+#046	#413	Wormadam	Wormadam	Bug	Grass
+#046	#413	Wormadam	Wormadam	Bug	Ground
+#046	#413	Wormadam	Wormadam	Bug	Steel
+#047	#414	Mothim	Mothim	Bug	Flying
+#053	#415	Combee	Combee	Bug	Flying
+#054	#416	Vespiquen	Vespiquen	Bug	Flying
+#055	#417	Pachirisu	Pachirisu	Electric
+#056	#418	Buizel	Buizel	Water
+#057	#419	Floatzel	Floatzel	Water
+#058	#420	Cherubi	Cherubi	Grass
+#059	#421	Cherrim	Cherrim	Grass
+#060	#422	Shellos	Shellos	Water
+#060	#422	Shellos	Shellos	Water
+#061	#423	Gastrodon	Gastrodon	Water	Ground
+#061	#423	Gastrodon	Gastrodon	Water	Ground
+#064	#424	Ambipom	Ambipom	Normal
+#065	#425	Drifloon	Drifloon	Ghost	Flying
+#066	#426	Drifblim	Drifblim	Ghost	Flying
+#067	#427	Buneary	Buneary	Normal
+#068	#428	Lopunny	Lopunny	Normal
+#073	#429	Mismagius	Mismagius	Ghost
+#075	#430	Honchkrow	Honchkrow	Dark	Flying
+#076	#431	Glameow	Glameow	Normal
+#077	#432	Purugly	Purugly	Normal
+#082	#433	Chingling	Chingling	Psychic
+#084	#434	Stunky	Stunky	Poison	Dark
+#085	#435	Skuntank	Skuntank	Poison	Dark
+#088	#436	Bronzor	Bronzor	Steel	Psychic
+#089	#437	Bronzong	Bronzong	Steel	Psychic
+#092	#438	Bonsly	Bonsly	Rock
+#094	#439	Mime Jr.	Mime Jr.	Psychic	Fairy
+#096	#440	Happiny	Happiny	Normal
+#102	#441	Chatot	Chatot	Normal	Flying
+#108	#442	Spiritomb	Spiritomb	Ghost	Dark
+#109	#443	Gible	Gible	Dragon	Ground
+#110	#444	Gabite	Gabite	Dragon	Ground
+#111	#445	Garchomp	Garchomp	Dragon	Ground
+#112	#446	Munchlax	Munchlax	Normal
+#115	#447	Riolu	Riolu	Fighting
+#116	#448	Lucario	Lucario	Fighting	Steel
+#122	#449	Hippopotas	Hippopotas	Ground
+#123	#450	Hippowdon	Hippowdon	Ground
+#127	#451	Skorupi	Skorupi	Poison	Bug
+#128	#452	Drapion	Drapion	Poison	Dark
+#129	#453	Croagunk	Croagunk	Poison	Fighting
+#130	#454	Toxicroak	Toxicroak	Poison	Fighting
+#131	#455	Carnivine	Carnivine	Grass
+#134	#456	Finneon	Finneon	Water
+#135	#457	Lumineon	Lumineon	Water
+#140	#458	Mantyke	Mantyke	Water	Flying
+#142	#459	Snover	Snover	Grass	Ice
+#143	#460	Abomasnow	Abomasnow	Grass	Ice
+#145	#461	Weavile	Weavile	Dark	Ice
+#180	#462	Magnezone	Magnezone	Electric	Steel
+#162	#463	Lickilicky	Lickilicky	Normal
+#188	#464	Rhyperior	Rhyperior	Ground	Rock
+#182	#465	Tangrowth	Tangrowth	Grass
+#199	#466	Electivire	Electivire	Electric
+#202	#467	Magmortar	Magmortar	Fire
+#175	#468	Togekiss	Togekiss	Fairy	Flying
+#184	#469	Yanmega	Yanmega	Bug	Flying
+#169	#470	Leafeon	Leafeon	Grass
+#170	#471	Glaceon	Glaceon	Ice
+#154	#472	Gliscor	Gliscor	Ground	Flying
+#205	#473	Mamoswine	Mamoswine	Ice	Ground
+#194	#474	Porygon-Z	Porygon-Z	Normal
+#160	#475	Gallade	Gallade	Psychic	Fighting
+#156	#476	Probopass	Probopass	Rock	Steel
+#191	#477	Dusknoir	Dusknoir	Ghost
+#208	#478	Froslass	Froslass	Ice	Ghost
+#152	#479	Rotom	Rotom	Electric	Ghost
+#152	#479	Rotom	Rotom	Electric	Fire
+#152	#479	Rotom	Rotom	Electric	Water
+#152	#479	Rotom	Rotom	Electric	Ice
+#152	#479	Rotom	Rotom	Electric	Flying
+#152	#479	Rotom	Rotom	Electric	Grass
+#146	#480	Uxie	Uxie	Psychic
+#147	#481	Mesprit	Mesprit	Psychic
+#148	#482	Azelf	Azelf	Psychic
+#149	#483	Dialga	Dialga	Steel	Dragon
+#150	#484	Palkia	Palkia	Water	Dragon
+ 	#485	Heatran	Heatran	Fire	Steel
+ 	#486	Regigigas	Regigigas	Normal
+#210	#487	Giratina	Giratina	Ghost	Dragon
+#210	#487	Giratina	Giratina	Ghost	Dragon
+ 	#488	Cresselia	Cresselia	Psychic
+ 	#489	Phione	Phione	Water
+#151	#490	Manaphy	Manaphy	Water
+ 	#491	Darkrai	Darkrai	Dark
+ 	#492	Shaymin	Shaymin	Grass
+ 	#492	Shaymin	Shaymin	Grass	Flying
+ 	#493	Arceus	Arceus	Normal
