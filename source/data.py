@@ -3,12 +3,13 @@
 
 # https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_National_Pok%C3%A9dex_number
 class Pokemon:
-    def __init__(self, generation, local_id, global_id, name, types):
+    def __init__(self, generation, local_id, global_id, name, types, is_alola):
         self.generation = generation
         self.local_id = local_id
         self.global_id = global_id
         self.name = name
         self.types = types
+        self.is_alola = is_alola
 
 # https://gamepress.gg/pokemongo/pokemon-go-type-chart
 class Effectivness:

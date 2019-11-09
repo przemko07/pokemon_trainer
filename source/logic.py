@@ -7,7 +7,7 @@ NOT_VERY_EFFECTIVE = 0.625
 WEAK = 0.391
 
 def calculate_effectivness(type_from, type_to):
-    effectivness = Linq(all_effectivnesses).FirstOrNone(lambda x: x.type == type_from )
+    effectivness = Linq(all_effectivnesses).first_or_none(lambda x: x.type == type_from )
     if (effectivness == None):
         return NORMAL
     

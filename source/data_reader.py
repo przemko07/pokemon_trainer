@@ -9,16 +9,18 @@ def read_database():
 
 
 def read_gens_csv():
-    read_gen_csv("data/pokemons_gen1.csv")
-    read_gen_csv("data/pokemons_gen2.csv")
-    read_gen_csv("data/pokemons_gen3.csv")
-    read_gen_csv("data/pokemons_gen4.csv")
-    read_gen_csv("data/pokemons_gen5.csv")
+    read_gen_csv("data/pokemons_gen6.csv")
+    
+    #read_gen_csv("data/pokemons_gen1.csv")
+    #read_gen_csv("data/pokemons_gen2.csv")
+    #read_gen_csv("data/pokemons_gen3.csv")
+    #read_gen_csv("data/pokemons_gen4.csv")
+    #read_gen_csv("data/pokemons_gen5.csv")
 
 def read_gen_csv(path):
-    m = re.search("pokemons_([\\w\\d]+).csv", path)
+    m = re.search("pokemons_([\\w]+).csv", path)
     if (m == None or m == False):
-        raise Exception("Can't parse path to pokemon gen file, expected \"pokemons_([\w\d]+).csv\" but got \"" + path + "\"")
+        raise Exception("Can't parse path to pokemon gen file, expected \"pokemons_([\\w]+).csv\" but got \"" + path + "\"")
         
     gen = m.group(1)
     try:
@@ -38,30 +40,32 @@ def read_gen_csv(path):
     
 def parse_gen_line_csv(gen, line):
     v = line.split("\t")
-    if (len(v) < 4):
+    if (len(v) < 5):
         raise Exception("Can't parse pokemon gen file line \"" + line + "\", expecting at least 4 columns")
     local_id = v[0]
     global_id = v[1]
     name = v[2]
-    types = v[3:]
+    types = Linq(v[4:]).select(lambda x: x.strip()).collection
+    is_alola = local_id == " "
 
     exist_local_id = Linq(all_pokemons).where(lambda x: x.generation == gen).any(lambda x: x.local_id == local_id)
     if (exist_local_id):
         raise Exception("Can't parse pokemon gen file line \"" + line + "\", local_id doubled \"" + local_id + "\"")
 
-    exist_global_id = Linq(all_pokemons).any(lambda x: x.global_id == global_id)
-    if (exist_global_id):
-        raise Exception("Can't parse pokemon gen file line \"" + line + "\", global_id doubled \"" + global_id + "\"")
+    if (not is_alola):
+        exist_global_id = Linq(all_pokemons).any(lambda x: x.global_id == global_id)
+        if (exist_global_id):
+            raise Exception("Can't parse pokemon gen file line \"" + line + "\", global_id doubled \"" + global_id + "\"")
 
-    m = re.match("\\W\\w+", name)
+    m = re.search("[A-Z][a-z]+", name)
     if (m == None or m == False):
-        raise Exception("Can't parse pokemon gen file line \"" + line + "\", expected name in format \\W\\w+, but got \"" + name + "\"")
+        raise Exception("Can't parse pokemon gen file line \"" + line + "\", expected name in format [A-Z][a-z], but got \"" + name + "\"")
 
     wrong_types = Linq(types).where(lambda x: not Linq(all_types).contains(x))
     if (len(wrong_types)):
         raise Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong type of pokemon, \"" + wrong_types + "\"")
 
-    all_pokemons.append(Pokemon(gen, local_id, global_id, name, types))
+    all_pokemons.append(Pokemon(gen, local_id, global_id, name, types, is_alola))
 
 
 def read_chart_csv(path):
@@ -84,18 +88,23 @@ def parse_chart_line_csv(line):
     if (len(values) == 0):
         raise Exception("Can't prase pokemon chart line \"" + line + "\", line can't be empty")
     
-    if (len(values) > 3):
+    if (len(values) > 4):
         raise Exception("Can't prase pokemon chart line \"" + line + "\", expecting columns 1-4")
     
     type = values[0]
-    super = values[1].split(" ") if len(values) >= 1 else []
-    not_very = values[2].split(" ") if len(values) >= 2 else []
-    weak = values[3].split(" ") if len(values) == 3 else []
+    super = values[1].split(" ") if len(values) >= 2 else []
+    not_very = values[2].split(" ") if len(values) >= 3 else []
+    weak = values[3].split(" ") if len(values) == 4 else []
+    
+    type = type.strip()
+    super = Linq(super).select(lambda x: x.strip()).where(lambda x: len(x) > 0).collection
+    not_very = Linq(not_very).select(lambda x: x.strip()).where(lambda x: len(x) > 0).collection
+    weak = Linq(weak).select(lambda x: x.strip()).where(lambda x: len(x) > 0).collection
     
     if (Linq(all_effectivnesses).any(lambda x: x.type == type)):
         raise Exception("Can't parse pokemon chart line \"" + line + "\", type \"" + type + "\" already added")
     
-    is_wrong_type = (all_types).contains(type)
+    is_wrong_type = not Linq(all_types).contains(type)
     if (is_wrong_type):
         raise Exception("Can't parse pokemon chart line \"" +  line + "\", wrong type of pokemon, \"" + type + "\"")
 
