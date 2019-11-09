@@ -5,7 +5,7 @@ from linq import *
 
 def read_database():
     read_gens_csv()
-    read_chart_csv()
+    read_chart_csv("data/chart.csv")
 
 
 def read_gens_csv():
@@ -28,13 +28,13 @@ def read_gen_csv(path):
         
     lines = file.readlines()
     if (len(lines) == 0):
-        raise Exception("Can't parse pokemon gen file \"" + path + "\" without a header")
+        raise Exception("Can't parse pokemon gen file \"" + path + "\" without a file header")
     # starting from 1 line, because 0 line is a header
     for line in lines[1:]:
         try:
             parse_gen_line_csv(gen, line)
         except Exception as e:
-            raise ValueError("Can't parse pokemon gen file \"" + path + "\"") from e
+            raise Exception("Can't parse pokemon gen file \"" + path + "\"") from e
     
 def parse_gen_line_csv(gen, line):
     v = line.split("\t")
@@ -55,29 +55,62 @@ def parse_gen_line_csv(gen, line):
 
     m = re.match("\\W\\w+", name)
     if (m == None or m == False):
-        return Exception("Can't parse pokemon gen file line \"" + line + "\", expected name in format \\W\\w+, but got \"" + name + "\"")
+        raise Exception("Can't parse pokemon gen file line \"" + line + "\", expected name in format \\W\\w+, but got \"" + name + "\"")
 
     wrong_types = Linq(types).where(lambda x: not Linq(all_types).contains(x))
-        
     if (len(wrong_types)):
-        return Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong type of pokemon, \"" + wrong_types + "\"")
+        raise Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong type of pokemon, \"" + wrong_types + "\"")
 
     all_pokemons.append(Pokemon(gen, local_id, global_id, name, types))
 
 
-def read_chart_csv():
-    file = open("data/chart.csv", "r")
+def read_chart_csv(path):
+    try:
+        file = open(path, "r")
+    except Exception as e:
+        raise Exception("Can't parse pokemon chart file \"" + path + "\"") from e
     lines = file.readlines()
+    if (len(lines) == 0):
+        raise Exception("Can't parse pokemon chart file \"" + path + "\"  without file header")
     # starting from 1 line, because 0 lien is a header
     for line in lines[1:]:
-        parse_chart_line_csv(line)
-        
+        try:
+            parse_chart_line_csv(line)
+        except Exception as e:
+            raise Exception("Can't parse pokemon chart file \"" + path + "\"") from e
+
 def parse_chart_line_csv(line):
-    v = line.split("\t")
-    type = v[0]
-    super = v[1].split(" ")
-    not_very = v[2].split(" ")
-    weak = v[3].split(" ")
+    values = line.split("\t")
+    if (len(values) == 0):
+        raise Exception("Can't prase pokemon chart line \"" + line + "\", line can't be empty")
+    
+    if (len(values) > 3):
+        raise Exception("Can't prase pokemon chart line \"" + line + "\", expecting columns 1-4")
+    
+    type = values[0]
+    super = values[1].split(" ") if len(values) >= 1 else []
+    not_very = values[2].split(" ") if len(values) >= 2 else []
+    weak = values[3].split(" ") if len(values) == 3 else []
+    
+    if (Linq(all_effectivnesses).any(lambda x: x.type == type)):
+        raise Exception("Can't parse pokemon chart line \"" + line + "\", type \"" + type + "\" already added")
+    
+    is_wrong_type = (all_types).contains(type)
+    if (is_wrong_type):
+        raise Exception("Can't parse pokemon chart line \"" +  line + "\", wrong type of pokemon, \"" + type + "\"")
+
+    wrong_types = Linq(super).where(lambda x: not Linq(all_types).contains(x))
+    if (len(wrong_types)):
+        raise Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong super effective type of pokemon, \"" + wrong_types + "\"")
+
+    wrong_types = Linq(not_very).where(lambda x: not Linq(all_types).contains(x))
+    if (len(wrong_types)):
+        raise Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong not very effective type of pokemon, \"" + wrong_types + "\"")
+
+    wrong_types = Linq(weak).where(lambda x: not Linq(all_types).contains(x))
+    if (len(wrong_types)):
+        raise Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong weak type of pokemon, \"" + wrong_types + "\"")
+
     all_effectivnesses.append(Effectivness(type, super, not_very, weak))
 
 

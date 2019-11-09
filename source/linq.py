@@ -19,5 +19,5 @@ class Linq:
         return self.first_or_none(func) != None
         
     def contains(self, obj):
-        self.first_or_none(lambda x: x == obj) != None
+        self.any(lambda x: x == obj)
         

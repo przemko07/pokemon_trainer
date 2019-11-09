@@ -8,7 +8,8 @@ WEAK = 0.391
 
 def calculate_effectivness(type_from, type_to):
     effectivness = Linq(all_effectivnesses).FirstOrNone(lambda x: x.type == type_from )
-    if (effectivness == None): return None
+    if (effectivness == None):
+        return NORMAL
     
     if (Linq(effectivness.super).contains(type_to)):
         return SUPER_EFFECTIVE
