@@ -15,7 +15,6 @@ from subprogram import *
 #search = Search(gen, localId, globalId, name, type, alola)
 #search = Option("search", [name, type])
 
-
 main = MultiProgram(
     [
         Print(
@@ -58,8 +57,6 @@ main = MultiProgram(
         #),
     ]
 )
-
-
 
 read_database()
 

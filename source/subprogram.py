@@ -47,7 +47,7 @@ class Find(Option):
         super().__init__("find", programs)
     
     def enter(self, args):
-        filter = super().enter(args)    
+        filter = super().enter(args)
         return Linq(all_pokemons).where(filter).collection
 
 class Print(Option):
@@ -56,9 +56,12 @@ class Print(Option):
     
     def enter(self, args):
         value = super().enter(args)
-        valueStr = str(value)
-        print(valueStr)
-        return valueStr
+        if (type(value) is list):
+            for x in value:
+                print(x)
+        else:
+            print(value)
+        return None
 
 class GenFilter(SubProgram):
     def enter(self, args):

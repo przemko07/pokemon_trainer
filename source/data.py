@@ -1,3 +1,5 @@
+from linq import *
+
 ######################################################
 # Pokemon DataBase
 
@@ -11,7 +13,24 @@ class Pokemon:
         self.types = types
         self.is_alola = is_alola
         
-
+    def __str__(self):
+        update_paddings()
+        if (self.is_alola):
+            return_format = "{name: <{name_padd} alola gen:{gen: <{gen_padd}}) local_id:{local_id: <{local_id_padd}} global_id:{global_id: <{global_id_padd}} {types}}"
+        else:
+            return_format = "{name: <{name_padd}       gen:{gen: <{gen_padd}}) local_id:{local_id: <{local_id_padd}} global_id:{global_id: <{global_id_padd}} {types}}"
+               
+        return return_format.format(
+            name = self.name,
+            name_padd = name_padding,
+            gen = self.generation,
+            gen_padd = generation_padding,
+            local_id = self.local_id,
+            local_id_padd = local_id_padding,
+            global_id = self.global_id,
+            global_id_padd = global_id_padding,
+            types = str(self.types)
+        )
     
 
 # https://gamepress.gg/pokemongo/pokemon-go-type-chart
@@ -29,3 +48,18 @@ all_types = [
 ]
 all_pokemons = []
 all_effectivnesses = []
+
+
+generation_padding = 1
+local_id_padding = 1
+global_id_padding = 1
+name_padding = 1
+last_update = -1
+def update_paddings():
+    global last_update
+    if (len(all_pokemons) > last_update):
+        generation_padding = Linq(all_pokemons).max(lambda x: len(x.generation))
+        local_id_padding = Linq(all_pokemons).max(lambda x: len(x.local_id))
+        global_id_padding = Linq(all_pokemons).max(lambda x: len(x.global_id))
+        name_padding = Linq(all_pokemons).max(lambda x: len(x.name))
+        last_update = len(all_pokemons)

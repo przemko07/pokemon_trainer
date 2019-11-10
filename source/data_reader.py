@@ -22,7 +22,7 @@ def read_gen_csv(path):
         
     gen = m.group(1)
     try:
-        file = open(path, "r")
+        file = open(path, "r", encoding='utf-8')
     except Exception as e:
         raise Exception("Can't parse pokemon gen file \"" + path + "\"") from e
         

@@ -24,6 +24,27 @@ class Linq:
 
     def any(self, func):
         return self.first_or_none(func) != None
+
+    def order(self, func):
+        pass
+        
+    def max(self, func):
+        item_max = self.collection[0]
+        item_value_max = func(item_max)
+        for obj in self.collection:
+            obj_value = func(obj)
+            if (obj_value > item_value_max):
+                item_max = obj
+                item_value_max = obj_value
+        return item_max        
+        
+    def join(self, separator):
+        value = ""
+        for obj in self.collection:
+            if (len(value) > 0):
+                value += separator
+            value += str(obj)
+        return value
         
     def contains(self, obj):
         return self.any(lambda x: x == obj)
