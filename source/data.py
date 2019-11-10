@@ -20,20 +20,13 @@ class Pokemon:
         global name_padding
         update_paddings()
         if (self.is_alola):
-            return_format = "{name: <{name_padd}} alola id {gen: <{gen_padd}}:{local_id: <{local_id_padd}} global_id {global_id: <{global_id_padd}} {types}"
+            return_format = "{name: <{name_padd}} alola"
         else:
-            return_format = "{name: <{name_padd}}       id {gen: <{gen_padd}}:{local_id: <{local_id_padd}} global_id {global_id: <{global_id_padd}} {types}"
+            return_format = "{name: <{name_padd}}      "
                
         return return_format.format(
             name = self.name,
-            name_padd = name_padding,
-            gen = self.generation,
-            gen_padd = generation_padding,
-            local_id = self.local_id,
-            local_id_padd = local_id_padding,
-            global_id = self.global_id,
-            global_id_padd = global_id_padding,
-            types = str(self.types)
+            name_padd = name_padding
         )
     
 
