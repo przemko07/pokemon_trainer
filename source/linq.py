@@ -25,8 +25,21 @@ class Linq:
     def any(self, func):
         return self.first_or_none(func) != None
 
-    def order(self, func):
-        pass
+    def order_by(self, func):
+        new_collection = copy(self.collection)        
+        while True:
+            change = False
+            for i in range(0, len(new_collection) - 1):
+                item_i_0_value = func(new_collection[i + 0])
+                item_i_1_value = func(new_collection[i + 1])
+                if (item_i_0_value < item_i_1_value):
+                    tmp = new_collection[i + 0]
+                    new_collection[i + 0] = new_collection[i + 1]
+                    new_collection[i + 1] = tmps
+                    change = True
+            if (change):
+                break                
+        return Linq(new_collection)
 
     def max_item(self, func):
         item_max = self.collection[0]

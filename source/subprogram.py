@@ -8,7 +8,11 @@ class SubProgramException(Exception):
 
 class SubProgram:
     def enter(self, args):
-        pass
+        raise Exception("Executing abstract method")
+
+class NoneProgram:
+    def enter(self, args):
+        return None
 
 
 class MultiProgram(SubProgram):
@@ -28,6 +32,7 @@ class MultiProgram(SubProgram):
                 error += str(e)
         raise SubProgramException(error)
 
+
 class Option(MultiProgram):
     def __init__(self, option, programs):
         self.option = option.strip()
@@ -43,13 +48,33 @@ class Option(MultiProgram):
         return super().enter(args[1:])
 
 
-class Find(Option):
+class OrderBy(Option):
     def __init__(self, programs):
-        super().__init__("find", programs)
+        super().__init__("order-by", programs)
+    
+    def enter(self, args):
+        filter = super().enter(args)
+        return Linq(all_pokemons).order_by(filter).collection
+
+
+class Where(Option):
+    def __init__(self, programs):
+        super().__init__("where", programs)
     
     def enter(self, args):
         filter = super().enter(args)
         return Linq(all_pokemons).where(filter).collection
+
+
+class NamedParameter(Option):
+    def __init__(self, name):
+        super().__init__("where", [NoneProgram()])
+    
+    def enter(self, args):
+        super().enter(args)
+        if (len(args) != 1):
+            raise SubProgramException("Expecting named argument")
+        return args[0]
         
 
 class Print(Option):
@@ -60,49 +85,46 @@ class Print(Option):
         value = super().enter(args)
         if (type(value) is list):
             for x in value:
-                if (type(x) is Pokemon):
-                    print(x)
-                else:
-                    print("NONE")
+                print(x)
+            print("length:" + str(len(value)))
         else:
             print(value)
-        return "ASD"
 
 class GenFilter(SubProgram):
     def enter(self, args):
         if (len(args) != 1):
             raise SubProgramException("Expecting generation argument")
-        return (lambda x: x.generation == args[0])
+        return (lambda x: x.generation.startswith(args[0]))
 
-#class PokemonLocalId(SubProgram):
-#    def enter(self, args):
-#        if (len(args) != 1):
-#            raise SubProgramException("Expecting local_id argument")
-#        print("Searching for local id:\"" + args[0] + "\"")
-#
-#class PokemonGlobalId(SubProgram):
-#    def enter(self, args):
-#        if (len(args) != 1):
-#            raise SubProgramException("Expecting global_id argument")
-#        print("Searching for global id:\"" + args[0] + "\"")
-#
-#class PokemonName(SubProgram):
-#    def enter(self, args):
-#        if (len(args) != 1):
-#            return False
-#        print("Searching for name:\"" + args[0] + "\"")
-#
-#class PokemonType(SubProgram):
-#    def enter(self, args):
-#        if (len(args) != 1):
-#            raise SubProgramException("Expecting type argument")
-#        print("Searching for type:\"" + args[0] + "\"")
-#
-#class PokemonAlola(SubProgram):
-#    def enter(self, args):
-#        if (len(args) != 1):
-#            raise SubProgramException("Expecting alola argument")
-#        print("Searching for alola:\"" + args[0] + "\"")
+class LocalIdFilter(SubProgram):
+    def enter(self, args):
+        if (len(args) != 1):
+            raise SubProgramException("Expecting local_id argument")
+        return (lambda x: x.local_id.startswith(args[0]))
+
+class GlobalIdFilter(SubProgram):
+    def enter(self, args):
+        if (len(args) != 1):
+            raise SubProgramException("Expecting global_id argument")
+        return (lambda x: x.global_id.startswith(args[0]))
+
+class NameFilter(SubProgram):
+    def enter(self, args):
+        if (len(args) != 1):
+            raise SubProgramException("Expecting global_id argument")
+        return (lambda x: x.name.startswith(args[0]))
+
+class TypeFilter(SubProgram):
+    def enter(self, args):
+        if (len(args) != 1):
+            raise SubProgramException("Expecting type argument")
+        return (lambda x: Linq(x.types).any(lambda y: str(y).startswith(args[0])))
+
+class AlolaFilter(SubProgram):
+    def enter(self, args):
+        if (len(args) != 1):
+            raise SubProgramException("Expecting alola argument")
+        return (lambda x: x.is_alola == bool(args[0]))
 
 
 

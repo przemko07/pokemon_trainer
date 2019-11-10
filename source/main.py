@@ -19,16 +19,25 @@ main = MultiProgram(
     [
         Print(
             [
-                Find(
+                Where(
                     [
-                        Option("gen", [GenFilter()])#,
-                        #Option("local-id", [PokemonLocalId()]),
-                        #Option("global-id", [PokemonGlobalId()]),
-                        #Option("name", [PokemonName()]),
-                        #Option("type", [PokemonType()]),
-                        #Option("alola", [PokemonAlola()]),
+                        Option("gen", [GenFilter()]),
+                        Option("local-id", [LocalIdFilter()]),
+                        Option("global-id", [GlobalIdFilter()]),
+                        Option("name", [NameFilter()]),
+                        Option("type", [TypeFilter()]),
+                        Option("alola", [AlolaFilter()]),
                     ]
-                )
+                ),        
+                #OrderBy(
+                #    [
+                #        NamedParameter("gen"),
+                #        NamedParameter("local-id"),
+                #        NamedParameter("global-id"),
+                #        NamedParameter("name"),
+                #        NamedParameter("type"),
+                #    ]
+                #)
             ]
         )#,
         #Option("counter-atack",
