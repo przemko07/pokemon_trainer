@@ -27,8 +27,8 @@ class Linq:
 
     def order(self, func):
         pass
-        
-    def max(self, func):
+
+    def max_item(self, func):
         item_max = self.collection[0]
         item_max_value = func(item_max)
         for obj in self.collection:
@@ -36,7 +36,10 @@ class Linq:
             if (obj_value > item_max_value):
                 item_max = obj
                 item_max_value = obj_value
-        return item_max_value
+        return item_max
+        
+    def max(self, func):
+        return func(self.max_item(func))
         
     def join(self, separator):
         value = ""
