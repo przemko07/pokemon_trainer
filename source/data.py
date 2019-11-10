@@ -14,11 +14,15 @@ class Pokemon:
         self.is_alola = is_alola
         
     def __str__(self):
+        global generation_padding
+        global local_id_padding
+        global global_id_padding
+        global name_padding
         update_paddings()
         if (self.is_alola):
-            return_format = "{name: <{name_padd} alola gen:{gen: <{gen_padd}}) local_id:{local_id: <{local_id_padd}} global_id:{global_id: <{global_id_padd}} {types}}"
+            return_format = "{name: <{name_padd}} alola id {gen: <{gen_padd}}:{local_id: <{local_id_padd}} global_id {global_id: <{global_id_padd}} {types}"
         else:
-            return_format = "{name: <{name_padd}       gen:{gen: <{gen_padd}}) local_id:{local_id: <{local_id_padd}} global_id:{global_id: <{global_id_padd}} {types}}"
+            return_format = "{name: <{name_padd}}       id {gen: <{gen_padd}}:{local_id: <{local_id_padd}} global_id {global_id: <{global_id_padd}} {types}"
                
         return return_format.format(
             name = self.name,
@@ -56,6 +60,10 @@ global_id_padding = 1
 name_padding = 1
 last_update = -1
 def update_paddings():
+    global generation_padding
+    global local_id_padding
+    global global_id_padding
+    global name_padding
     global last_update
     if (len(all_pokemons) > last_update):
         generation_padding = Linq(all_pokemons).max(lambda x: len(x.generation))
