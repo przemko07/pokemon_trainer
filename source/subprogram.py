@@ -42,6 +42,7 @@ class Option(MultiProgram):
             raise SubProgramException("Can't use option \"" + self.option + "\" wrong argument \"" + args[0] + "\"")
         return super().enter(args[1:])
 
+
 class Find(Option):
     def __init__(self, programs):
         super().__init__("find", programs)
@@ -49,6 +50,7 @@ class Find(Option):
     def enter(self, args):
         filter = super().enter(args)
         return Linq(all_pokemons).where(filter).collection
+        
 
 class Print(Option):
     def __init__(self, programs):
@@ -58,10 +60,13 @@ class Print(Option):
         value = super().enter(args)
         if (type(value) is list):
             for x in value:
-                print(x)
+                if (type(x) is Pokemon):
+                    print(x)
+                else:
+                    print("NONE")
         else:
             print(value)
-        return None
+        return "ASD"
 
 class GenFilter(SubProgram):
     def enter(self, args):

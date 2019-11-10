@@ -30,13 +30,13 @@ class Linq:
         
     def max(self, func):
         item_max = self.collection[0]
-        item_value_max = func(item_max)
+        item_max_value = func(item_max)
         for obj in self.collection:
             obj_value = func(obj)
-            if (obj_value > item_value_max):
+            if (obj_value > item_max_value):
                 item_max = obj
-                item_value_max = obj_value
-        return item_max        
+                item_max_value = obj_value
+        return item_max_value
         
     def join(self, separator):
         value = ""
