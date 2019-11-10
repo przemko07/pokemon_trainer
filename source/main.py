@@ -18,40 +18,40 @@ from subprogram import *
 
 main = MultiProgram(
     [
-        Option("search",
+        Print(Find(
             [
-                Option("gen", [PokemonGen()]),
-                Option("local-id", [PokemonLocalId()]),
-                Option("global-id", [PokemonGlobalId()]),
-                Option("name", [PokemonName()]),
-                Option("type", [PokemonType()]),
-                Option("alola", [PokemonAlola()]),
+                GenFilter()#,
+                #Option("local-id", [PokemonLocalId()]),
+                #Option("global-id", [PokemonGlobalId()]),
+                #Option("name", [PokemonName()]),
+                #Option("type", [PokemonType()]),
+                #Option("alola", [PokemonAlola()]),
             ]
-        ),
-        Option("counter-atack",
-            [
-                Option("gen:local-id", [PokemonLocalId()]),
-                Option("global-id", [PokemonGlobalId()]),
-                Option("name", [PokemonName()]),
-                Option("type", [PokemonType()]),
-            ]
-        ),
-        Option("counter-def",
-            [
-                Option("gen:local-id", [PokemonLocalId()]),
-                Option("global-id", [PokemonGlobalId()]),
-                Option("name", [PokemonName()]),
-                Option("type", [PokemonType()]),
-            ]
-        ),
-        Option("counter",
-            [
-                Option("gen:local-id", [PokemonLocalId()]),
-                Option("global-id", [PokemonGlobalId()]),
-                Option("name", [PokemonName()]),
-                Option("type", [PokemonType()]),
-            ]
-        ),
+        ))#,
+        #Option("counter-atack",
+        #    [
+        #        Option("gen:local-id", [PokemonLocalId()]),
+        #        Option("global-id", [PokemonGlobalId()]),
+        #        Option("name", [PokemonName()]),
+        #        Option("type", [PokemonType()]),
+        #    ]
+        #),
+        #Option("counter-def",
+        #    [
+        #        Option("gen:local-id", [PokemonLocalId()]),
+        #        Option("global-id", [PokemonGlobalId()]),
+        #        Option("name", [PokemonName()]),
+        #        Option("type", [PokemonType()]),
+        #    ]
+        #),
+        #Option("counter",
+        #    [
+        #        Option("gen:local-id", [PokemonLocalId()]),
+        #        Option("global-id", [PokemonGlobalId()]),
+        #        Option("name", [PokemonName()]),
+        #        Option("type", [PokemonType()]),
+        #    ]
+        #),
     ]
 )
 
