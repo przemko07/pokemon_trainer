@@ -19,5 +19,3 @@ def calculate_effectivness(type_from, type_to):
         return WEAK
     else:
         return NORMAL
-
-        
