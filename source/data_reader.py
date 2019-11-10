@@ -9,13 +9,11 @@ def read_database():
 
 
 def read_gens_csv():
-    read_gen_csv("data/pokemons_gen6.csv")
-    
-    #read_gen_csv("data/pokemons_gen1.csv")
-    #read_gen_csv("data/pokemons_gen2.csv")
-    #read_gen_csv("data/pokemons_gen3.csv")
-    #read_gen_csv("data/pokemons_gen4.csv")
-    #read_gen_csv("data/pokemons_gen5.csv")
+    read_gen_csv("data/pokemons_gen1.csv")
+    read_gen_csv("data/pokemons_gen2.csv")
+    read_gen_csv("data/pokemons_gen3.csv")
+    read_gen_csv("data/pokemons_gen4.csv")
+    read_gen_csv("data/pokemons_gen5.csv")
 
 def read_gen_csv(path):
     m = re.search("pokemons_([\\w]+).csv", path)
@@ -42,21 +40,12 @@ def parse_gen_line_csv(gen, line):
     v = line.split("\t")
     if (len(v) < 5):
         raise Exception("Can't parse pokemon gen file line \"" + line + "\", expecting at least 4 columns")
+    
     local_id = v[0]
     global_id = v[1]
     name = v[2]
     types = Linq(v[4:]).select(lambda x: x.strip()).collection
-    is_alola = local_id == " "
-
-    exist_local_id = Linq(all_pokemons).where(lambda x: x.generation == gen).any(lambda x: x.local_id == local_id)
-    if (exist_local_id):
-        raise Exception("Can't parse pokemon gen file line \"" + line + "\", local_id doubled \"" + local_id + "\"")
-
-    if (not is_alola):
-        exist_global_id = Linq(all_pokemons).any(lambda x: x.global_id == global_id)
-        if (exist_global_id):
-            raise Exception("Can't parse pokemon gen file line \"" + line + "\", global_id doubled \"" + global_id + "\"")
-
+    
     m = re.search("[A-Z][a-z]+", name)
     if (m == None or m == False):
         raise Exception("Can't parse pokemon gen file line \"" + line + "\", expected name in format [A-Z][a-z], but got \"" + name + "\"")
@@ -65,6 +54,25 @@ def parse_gen_line_csv(gen, line):
     if (len(wrong_types)):
         raise Exception("Can't parse pokemon gen file line \"" +  line + "\", wrong type of pokemon, \"" + wrong_types + "\"")
 
+    exist_name = Linq(all_pokemons).any(lambda x: x.name == name)
+    exist_local_id = Linq(all_pokemons).where(lambda x: x.generation == gen).any(lambda x: x.local_id == local_id) if local_id != " " else False
+    exist_global_id = Linq(all_pokemons).any(lambda x: x.global_id == global_id) if global_id != " " else False
+
+    is_alola = exist_name and (exist_local_id or exist_global_id)
+    
+    if (not is_alola):
+        if (exist_local_id):
+            raise Exception("Can't parse pokemon gen file line \"" + line + "\", local_id doubled \"" + local_id + "\"")
+
+        if (exist_global_id):
+            raise Exception("Can't parse pokemon gen file line \"" + line + "\", global_id doubled \"" + global_id + "\"")
+
+        if (exist_name):
+            raise Exception("Can't parse pokemon gen file line \"" + line + "\", name doubled \"" + name + "\"")
+
+    if (len(global_id.strip()) == 0):
+        raise Exception("Can't parse pokemon gen file line \"" + line + "\", global_id is empty")
+    
     all_pokemons.append(Pokemon(gen, local_id, global_id, name, types, is_alola))
 
 

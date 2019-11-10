@@ -10,6 +10,9 @@ class Pokemon:
         self.name = name
         self.types = types
         self.is_alola = is_alola
+        
+
+    
 
 # https://gamepress.gg/pokemongo/pokemon-go-type-chart
 class Effectivness:

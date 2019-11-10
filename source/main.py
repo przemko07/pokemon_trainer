@@ -18,16 +18,20 @@ from subprogram import *
 
 main = MultiProgram(
     [
-        Print(Find(
+        Print(
             [
-                GenFilter()#,
-                #Option("local-id", [PokemonLocalId()]),
-                #Option("global-id", [PokemonGlobalId()]),
-                #Option("name", [PokemonName()]),
-                #Option("type", [PokemonType()]),
-                #Option("alola", [PokemonAlola()]),
+                Find(
+                    [
+                        Option("gen", [GenFilter()])#,
+                        #Option("local-id", [PokemonLocalId()]),
+                        #Option("global-id", [PokemonGlobalId()]),
+                        #Option("name", [PokemonName()]),
+                        #Option("type", [PokemonType()]),
+                        #Option("alola", [PokemonAlola()]),
+                    ]
+                )
             ]
-        ))#,
+        )#,
         #Option("counter-atack",
         #    [
         #        Option("gen:local-id", [PokemonLocalId()]),
@@ -55,11 +59,16 @@ main = MultiProgram(
     ]
 )
 
-main.enter(sys.argv[1:])
 
 
-#read_database()
-#
+read_database()
+
+try:
+    main.enter(sys.argv[1:])
+except SubProgramException as e:
+    print("Error:" + str(e))
+
+
 #print ("Grass deals " + str(calculate_effectivness("Grass", "Dark") * 100) + "% dmg to Dark")
 #print ("Grass deals " + str(calculate_effectivness("Grass", "Water") * 100) + "% dmg to Water")
 #print ("Grass deals " + str(calculate_effectivness("Grass", "Steel") * 100) + "% dmg to Steel")
