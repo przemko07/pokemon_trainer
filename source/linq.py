@@ -26,7 +26,7 @@ class Linq:
         return self.first_or_none(func) != None
 
     def order_by(self, func):
-        new_collection = copy(self.collection)        
+        new_collection = self.collection.copy()
         while True:
             change = False
             for i in range(0, len(new_collection) - 1):
@@ -35,7 +35,7 @@ class Linq:
                 if (item_i_0_value < item_i_1_value):
                     tmp = new_collection[i + 0]
                     new_collection[i + 0] = new_collection[i + 1]
-                    new_collection[i + 1] = tmps
+                    new_collection[i + 1] = tmp
                     change = True
             if (change):
                 break                

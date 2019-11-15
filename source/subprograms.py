@@ -2,20 +2,31 @@ from linq import *
 from data import *
 from logic import *
 
+# http://smlweb.cpsc.ucalgary.ca/start.html
+#
+# LL lanugage
+# print -> collection
+# collection -> collection operation
+#             | source
+# source -> pokemonlist
+#         | chartlist
+# operation -> where filter
+#            | orderby name
+#            | first
+#            | first filter
+#            | take number
+#            | skip number
+# filter -> name equal value
+# filter -> name not_equal value
+
+
+
+
 class SubProgramException(Exception):
     pass
 
 
-class SubProgram:
-    def enter(self, args):
-        raise Exception("Executing abstract method")
-
-class NoneProgram:
-    def enter(self, args):
-        return None
-
-
-class MultiProgram(SubProgram):
+class MultiProgram:
     def __init__(self, programs):
         self.programs = programs        
         if (len(self.programs) == 0):
@@ -148,7 +159,7 @@ def CollectionFactory(args):
     if (len(args) < 1):
         raise SubProgramException("Can't create Collection factory, empty args")
     if (args[0] == "where"): return Where([FilterFactory(args[1:])])
-    elif (args[1] == "order-by"): return Order-By([FilterFactory(args[1:])])
+    elif (args[0] == "order-by"): return OrderBy([FilterFactory(args[1:])])
     else:
         raise SubProgramException("Expecting argument (where, order-by)")
 
