@@ -2,29 +2,32 @@ from linq import *
 from data import *
 from logic import *
 
-# http://smlweb.cpsc.ucalgary.ca/start.html
-#
-# LL lanugage
-# print -> collection
-# collection -> collection operation
-#             | source
-# source -> pokemonlist
-#         | chartlist
-# operation -> where filter
-#            | orderby name
-#            | first
-#            | first filter
-#            | take number
-#            | skip number
-# filter -> name equal value
-# filter -> name not_equal value
-
-
-
 
 class SubProgramException(Exception):
     pass
 
+class Main:
+    def __init(self)
+        self.action = None
+        self.collection = None
+    def enter(self):
+        self.action.collection = self.collection
+        self.action.
+
+class Action:
+    def __init__(self, counter):
+        self.counter = counter
+    def enter(self, collection):
+        if (counter):
+            pass
+        else:
+            for (item in collection):
+                print(item)
+            print("===============================================================================")
+            print("count:"len(item))
+
+class Collection:
+    
 
 class MultiProgram:
     def __init__(self, programs):
@@ -136,90 +139,4 @@ class AlolaFilter(SubProgram):
         if (len(args) != 1):
             raise SubProgramException("Expecting alola argument")
         return (lambda x: x.is_alola == bool(args[0]))
-
-
-def MainProgramFactory(args):
-    if (len(args) < 1):
-        raise SubProgramException("Can't create Main factory, empty args")
-    error = ""
-    try:
-        return PrintFactory(args)
-    except SubProgramException as e:
-        error = "\n" + str(e) if len(error) > 0 else str(e)
-    raise SubProgramException(error)
-
-def PrintFactory(args):
-    if (len(args) < 1):
-        raise SubProgramException("Can't create Print factory, empty args")
-    if (args[0] == "print"): return Print([CollectionFactory(args[1:])])
-    else:
-        raise SubProgramException("Expecting argument (print)")    
-
-def CollectionFactory(args):
-    if (len(args) < 1):
-        raise SubProgramException("Can't create Collection factory, empty args")
-    if (args[0] == "where"): return Where([FilterFactory(args[1:])])
-    elif (args[0] == "order-by"): return OrderBy([FilterFactory(args[1:])])
-    else:
-        raise SubProgramException("Expecting argument (where, order-by)")
-
-#def WhereFactory(args):
-#    if (len(args) < 2)
-#        raise SubProgramException("Can't create Where factory, empty args")
-#    if (args[0] != "where"):
-#        raise SubProgramException("Expecting print argument")
-#    try:
-#        return Where([FilterFactory(args[1:])]
-#    except SubProgramException as e:
-#        raise SubProgramException("Can't create Where factory, FilterFactory exception") from e
-
-#def OrderByFactory(args):
-#    if (len(args) < 2)
-#        raise SubProgramException("Can't create OrderBy factory, empty args")
-#    if (args[0] != "order-by"):
-#        raise SubProgramException("Expecting order-by argument")
-#    error = ""
-#    try:
-#        program = GenFilterFactory(args[1:])
-#    except SubProgramException as e:
-#        error += "\n" + str(e) if len(error) > 0 else str(e)
-#    try:
-#        program = NameFilterFactory(args[1:])
-#    except SubProgramException as e:
-#        error += "\n" + str(e) if len(error) > 0 else str(e)
-#    try:
-#        program = TypeFilterFactory(args[1:])
-#    except SubProgramException as e:
-#        error += "\n" + str(e) if len(error) > 0 else str(e)    
-#    if (len(error) > 0):
-#        raise SubProgramException(error)
-#    return Where([program])   
-
-def FilterFactory(args):
-    if (len(args) < 1):
-        raise SubProgramException("Can't create Gen Filter factory, empty args")
-    if (args[0] == "gen"): return Option("gen", [GenFilter()])
-    elif (args[0] == "local-id"): return Option("local-id", [LocalIdFilter()])
-    elif (args[0] == "global-id"): return Option("global-id", [GlobalIdFilter()])
-    elif (args[0] == "name"): return Option("name", [NameFilter()])
-    elif (args[0] == "type"): return Option("type", [TypeFilter()])
-    elif (args[0] == "alola"): return Option("alola", [AlolaFilter()])
-    else:
-        raise SubProgramException("Expecting argument (gen, local-id, global-id, name, type, alola)")
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
