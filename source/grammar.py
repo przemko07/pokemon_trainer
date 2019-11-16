@@ -93,6 +93,8 @@ def COLLECTION1(parser):
 #              | reverse OPERATION20 .
 # OPERATION20 -> OPERATION19 OPERATION20
 #              |.
+def OPERATION20(parser):
+    OPERATION19(parser)
 # OP20 -> equal
 #       | contains
 #       | greater
@@ -108,7 +110,77 @@ def COLLECTION1(parser):
 #       | close7
 #       | close8
 #       | close9.
-#
+def OP20(parser):
+    value = parser.peek()
+    if (value == "equal"):
+        parser.move()
+        return values
+    elif (value == "contains"):
+        parser.move()
+        return values
+    else:
+        raise GrammarException("Not supported")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

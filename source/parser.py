@@ -11,6 +11,9 @@ class Parser:
             return None
         return self.args[self.index + i]
 
-    def move(self, i):
+    def move(self):
+        self.move_index(1)
+
+    def move_index(self, i):
         index += i
 
