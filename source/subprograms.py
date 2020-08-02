@@ -6,15 +6,14 @@ from logic import *
 class SubProgramException(Exception):
     pass
 
-class Main:
-    def __init(self)
-        self.action = None
-        self.collection = None
+class MainProgram:
+    def __init(self, action, collection)
+        self.action = action
+        self.collection = collection
     def enter(self):
-        self.action.collection = self.collection
-        self.action.
+        self.action.enter(self.collection)
 
-class Action:
+class ActionProgram:
     def __init__(self, counter):
         self.counter = counter
     def enter(self, collection):

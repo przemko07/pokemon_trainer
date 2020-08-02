@@ -4,14 +4,17 @@ from data import *
 from data_reader import * 
 from logic import * 
 from subprogram import *
+from parser import *
+from grammar import *
 
 
 read_database()
 
 try:
     args = sys.argv[1:]
-    main = MainProgramFactory(args)
-    main.enter(args)
+    parser = Parser(args)
+    main = MAIN0(parser)
+    main.enter()
 except SubProgramException as e:
     print("Error:" + str(e))
 

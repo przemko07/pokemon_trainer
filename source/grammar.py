@@ -51,6 +51,7 @@ class GrammarException(Exception):
 def MAIN0(parser):
     action = ACTION0(parser)
     collection = COLLECTION1(parser)
+    return MainProgram(action, collection)
 # ACTION0 -> counter
 #          |.
 def ACTION0(parser):
@@ -95,6 +96,7 @@ def COLLECTION1(parser):
 #              |.
 def OPERATION20(parser):
     OPERATION19(parser)
+    OPERATION20()
 # OP20 -> equal
 #       | contains
 #       | greater
