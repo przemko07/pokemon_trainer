@@ -7,26 +7,45 @@ class SubProgramException(Exception):
     pass
 
 class MainProgram:
-    def __init(self, action, collection)
-        self.action = action
-        self.collection = collection
+    def __init__(self, actionProgram, collectionProgram)
+        self.actionProgram = actionProgram
+        self.collectionProgram = collectionProgram
     def enter(self):
-        self.action.enter(self.collection)
+        collection = self.collectionProgram.enter()
+        self.actionProgram.enter(collection)
 
 class ActionProgram:
-    def __init__(self, counter):
-        self.counter = counter
+    def __init__(self, name):
+        self.name = name
     def enter(self, collection):
-        if (counter):
-            pass
-        else:
+        if (name == "count"):
+            print("count:" + str(len(item)))
+        elif (name == None or name == "print"):
             for (item in collection):
                 print(item)
-            print("===============================================================================")
-            print("count:"len(item))
+            print("count:" + str(len(item)))
+        else:
+            raise SubProgramException("Action " + name + " not supported.")
 
-class Collection:
-    
+class CollectionProgram:
+    def __init__(self, sourceProgram, collectionProgram):
+        self.sourceProgram = sourceProgram
+        self.collection = collectionProgram
+    def enter(self):
+        # make logic for returning smth
+        return [1, 2, 3]
+        
+class SourceProgram:
+    def __init__(self, name):
+        self.name = name
+    def enter(self):
+        if (name == "pokemonlist"):
+            return all_pokemons
+        elif (name == "chartlist"):
+            # TODO: what should I return here?
+            raise SubProgramException("I dont know what to do here")
+        else:
+            raise SubProgramException("Source " + name + " not supported.")
 
 class MultiProgram:
     def __init__(self, programs):
